@@ -2,17 +2,20 @@ PROTOCOL="energy"
 
 rednet.open("top")
 
-wasteMeter = peripheral.wrap("right")
+spsMeter = peripheral.wrap("right")
+wasteMeter = peripheral.wrap("front")
 usageMeter = peripheral.wrap("left")
 
 print("Monitoring turbine power output") 
 while (true) do
-	powerConsumption = wasteMeter.getTransferRate()
-	wastePower = usageMeter.getTransferRate()
+	powerConsumption = usageMeter.getTransferRate()
+	wastePower = wasteMeter.getTransferRate()
+	spsPower = spsMeter.getTransferRate()
 
 	messageContent = {
 		["powerConsumption"] = powerConsumption,
 		["wastePower"] = wastePower,
+		["spsPower"] = spsPower,
 	}
 	rednet.broadcast(messageContent, PROTOCOL)
 	

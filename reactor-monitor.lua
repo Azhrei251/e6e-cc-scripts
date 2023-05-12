@@ -14,7 +14,7 @@ while (true) do
 	burnRate = reactor.getBurnRate()
 	reactorEnabled = reactor.getStatus()
 
-	if (coolantPercent <= 0.1 or wastePercent >= 0.95) then
+	if (reactorEnabled and coolantPercent <= 0.1 or wastePercent >= 0.95) then
 		reactor.scram()
 	end
 	 

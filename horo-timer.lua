@@ -5,6 +5,8 @@ local cycleDay = 2
  
 while(true)
 do  
+	monitor.clear()
+	
     local time = textutils.formatTime(os.time())
     local day = os.day()
     local daysTillHoro = 36 - ((day - cycleDay) % 36)
