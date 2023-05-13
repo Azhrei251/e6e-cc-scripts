@@ -8,6 +8,7 @@ monitor.setTextScale(0.5)
 
 print("Monitoring reactor") 
 while (true) do
+	monitor.clear()
 	coolantPercent = reactor.getCoolantFilledPercentage()
 	wastePercent = reactor.getWasteFilledPercentage()
 	fuelPercent = reactor.getFuelFilledPercentage()
