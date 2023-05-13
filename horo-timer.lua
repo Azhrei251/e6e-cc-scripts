@@ -5,7 +5,7 @@ local cycleDay = 2
  
 while(true)
 do  
-	monitor.clear()
+    monitor.clear()
 	
     local time = textutils.formatTime(os.time())
     local day = os.day()
