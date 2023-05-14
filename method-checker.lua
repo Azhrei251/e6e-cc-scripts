@@ -1,3 +1,4 @@
+monitor = peripheral.wrap("right")
 methods = peripheral.getMethods("back")
 
 line = 1
