@@ -7,4 +7,5 @@ while (true) do
 	else
 		redstone.setOutput(spsEnergyStorageDirection, true)
 	end
+	sleep(5)
 end
