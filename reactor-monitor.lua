@@ -7,39 +7,37 @@ rednet.open("top")
 
 monitor.setTextScale(0.5)
 
+rednet.broadcast("reset", RESET_PROTOCOL)
+sleep(5)
+
 print("Monitoring reactor") 
 while (true) do
-	if (reactor.isFormed()) then
-		coolantPercent = reactor.getCoolantFilledPercentage()
-		wastePercent = reactor.getWasteFilledPercentage()
-		fuelPercent = reactor.getFuelFilledPercentage()
-		burnRate = reactor.getBurnRate()
-		reactorEnabled = reactor.getStatus()
+	coolantPercent = reactor.getCoolantFilledPercentage()
+	wastePercent = reactor.getWasteFilledPercentage()
+	fuelPercent = reactor.getFuelFilledPercentage()
+	burnRate = reactor.getBurnRate()
+	reactorEnabled = reactor.getStatus()
 
-		if (reactorEnabled and (coolantPercent <= 0.1 or wastePercent >= 0.95)) then
-			reactor.scram()
-		end
-
-		messageContent = {
-			["coolantPercent"] = coolantPercent,
-			["wastePercent"] = wastePercent,
-			["fuelPercent"] = fuelPercent,
-			["burnRate"] = burnRate,
-			["reactorEnabled"] = reactorEnabled,
-		}
-		rednet.broadcast(messageContent, PROTOCOL)
-
-		monitor.clear()
-		line = 1
-		for k,v in pairs(messageContent) do
-			monitor.setCursorPos(1, line)
-			monitor.write(k..": "..tostring(v))
-			line = line + 1
-		end
-
-		sleep(0.05)
-	else
-		rednet.broadcast("reset", RESET_PROTOCOL)
-		sleep(0.5)
+	if (reactorEnabled and (coolantPercent <= 0.1 or wastePercent >= 0.95)) then
+		reactor.scram()
 	end
+
+	messageContent = {
+		["coolantPercent"] = coolantPercent,
+		["wastePercent"] = wastePercent,
+		["fuelPercent"] = fuelPercent,
+		["burnRate"] = burnRate,
+		["reactorEnabled"] = reactorEnabled,
+	}
+	rednet.broadcast(messageContent, PROTOCOL)
+
+	monitor.clear()
+	line = 1
+	for k,v in pairs(messageContent) do
+		monitor.setCursorPos(1, line)
+		monitor.write(k..": "..tostring(v))
+		line = line + 1
+	end
+
+	sleep(0.05)
 end
