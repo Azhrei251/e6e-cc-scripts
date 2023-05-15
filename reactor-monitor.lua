@@ -7,8 +7,10 @@ rednet.open("top")
 
 monitor.setTextScale(0.5)
 
+print("Initiating reset")
 rednet.broadcast("reset", RESET_PROTOCOL)
 sleep(5)
+print("Finished reset")
 
 print("Monitoring reactor") 
 while (true) do
