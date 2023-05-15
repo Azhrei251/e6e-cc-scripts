@@ -6,6 +6,7 @@ THOUSAND = 1000
 ENERGY_UNIT = "RF/t"
 
 REACTOR_PROTOCOL = "reactor"
+REACTOR_RESET_PROTOCOL="reactor-reset"
 ENERGY_PROTOCOL = "energy"
 
 rednet.open("left")
@@ -15,8 +16,6 @@ speaker = peripheral.wrap("right")
 
 reactor_monitor.setTextScale(0.5)
 reactor_monitor.clear()
-
-should_sound_alarm = false
 
 local function print_line_to_monitor(monitor, lineNum, text)
 	monitor.setCursorPos(1, lineNum)
@@ -94,8 +93,6 @@ function display_reactor_info(reactor_info)
 	print_line_to_monitor(reactor_monitor, 6, string.format("Coolant: %.2f%%", coolantPercent))
 end
 
-
-
 print("Monitoring nuclear fission plant")
 repeat 
 	local id, message, protocol = rednet.receive()
@@ -104,6 +101,9 @@ repeat
 		display_reactor_info(message)
 	elseif (protocol == ENERGY_PROTOCOL) then 
 		display_energy_info(message)
+	elseif (protocol == REACTOR_RESET_PROTOCOL) then
+		redstone.setOutput("back", true)
+		sleep(0.1)
+		redstone.setOutput("back", false)
 	end
 until false
-
