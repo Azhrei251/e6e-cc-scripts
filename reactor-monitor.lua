@@ -41,5 +41,6 @@ while (true) do
 		sleep(0.05)
 	else
 		rednet.broadcast("reset", RESET_PROTOCOL)
+		sleep(0.5)
 	end
 end
