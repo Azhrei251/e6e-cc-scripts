@@ -11,7 +11,7 @@ print("Monitoring reactor")
 while (true) do
 	monitor.clear()
 	
-	if (false or reactor.isFormed()) then
+	if (reactor.isFormed()) then
 		coolantPercent = reactor.getCoolantFilledPercentage()
 		wastePercent = reactor.getWasteFilledPercentage()
 		fuelPercent = reactor.getFuelFilledPercentage()
