@@ -9,8 +9,6 @@ monitor.setTextScale(0.5)
 
 print("Monitoring reactor") 
 while (true) do
-	monitor.clear()
-	
 	if (reactor.isFormed()) then
 		coolantPercent = reactor.getCoolantFilledPercentage()
 		wastePercent = reactor.getWasteFilledPercentage()
@@ -31,6 +29,7 @@ while (true) do
 		}
 		rednet.broadcast(messageContent, PROTOCOL)
 
+		monitor.clear()
 		line = 1
 		for k,v in pairs(messageContent) do
 			monitor.setCursorPos(1, line)
